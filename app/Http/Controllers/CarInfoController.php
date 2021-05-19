@@ -5,7 +5,10 @@ use DataTables;
 use Illuminate\Http\Request;
 use App\Models\CarInfo;
 use App\Models\carGallery;
+use App\Models\Parking;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 class CarInfoController extends Controller
 {
     /**
@@ -44,16 +47,17 @@ class CarInfoController extends Controller
      */
     public function store(Request $request)
     {
-
+        
+        
         $info= CarInfo::create(['matricul'=>$request->matricule,
         'body_number'=>$request->vin,
         'color'=>$request->color,
-        'date_buy'=>date('Y-m-d',strtotime($request->dateAchat)),
+        'date_buy'=>Carbon::createFromFormat('d/m/Y',strval($request->dateAchat))->toDateString(),
         'maisson_achat'=>$request->maison,
         'rate_credit'=>floatval($request->creditRate),
         'car_price'=>floatval($request->prixAchat),
-        'credit_date'=>date('Y-m-d',strtotime($request->dateCredit)),
-        'date_vente'=>date('Y-m-d',strtotime($request->dateVente)),
+        'credit_date'=>Carbon::createFromFormat('d/m/Y',strval($request->dateCredit))->toDateString(),
+        'date_vente'=>Carbon::createFromFormat('d/m/Y',strval($request->dateVente))->toDateString(),
         'prix_vente'=>floatval($request->prixVente),
         'transmission'=>$request->trans[0],
         'carrburant'=>$request->carb,
@@ -63,6 +67,7 @@ class CarInfoController extends Controller
         'category'=>$request->type,
         'observation'=>$request->note,
         'user_id'=>1]);
+        Parking::create(['car_id'=>$info->id,'dispo'=>1,'user_id'=>1]);
         if ($request->photos) {
             foreach ($request->photos as $key => $img) {
                 $path = uniqid().'.'.$img->extension();

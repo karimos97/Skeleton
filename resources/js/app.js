@@ -20,25 +20,27 @@ var KTBootstrapDatepicker = function () {
     }
 
 
-     // enable clear button
-     $('.date-p').datepicker({
-      rtl: KTUtil.isRTL(),
-      todayBtn: "linked",
-      clearBtn: true,
-      todayHighlight: true,
-      templates: arrows
-     });
-
-
-    }
-
-    return {
-     // public functions
-     init: function() {
-      demos();
+    var demos = function () {
+        $('.date-p').datepicker({
+            rtl: KTUtil.isRTL(),
+            todayBtn: "linked",
+            clearBtn: true,
+            todayHighlight: true,
+            templates: arrows
+           });
+     
      }
-    };
-   }();
+    
+     return {
+      // public functions
+      init: function() {
+       demos();
+      }
+     };
+    }();
+
+
+
 
    jQuery(document).ready(function() {
     KTBootstrapDatepicker.init();

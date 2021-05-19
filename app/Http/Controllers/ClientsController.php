@@ -259,4 +259,10 @@ class ClientsController extends Controller
     {
         return Clients::find($id)->delete();
     }
+
+    public function getclients(Request $request){
+        return Clients::join('identities','identities.client_id','clients.id')
+                 ->select('clients.id','identities.cin')
+                 ->where('identities.cin', 'LIKE', '%' . $request->get('q') . '%')->paginate(10);
+    }
 }

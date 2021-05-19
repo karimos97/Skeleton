@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-/*         $this->call(ClientSeeder::class);
+        $this->call(ClientSeeder::class);
         $this->call(Countries::class);
         $this->call(Regions::class);
-        $this->call(Cities::class);*/
+        $this->call(Cities::class);
         $this->call(CarBrands::class);
         $this->call(CarModels::class);
     }

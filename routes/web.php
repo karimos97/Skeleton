@@ -52,8 +52,11 @@ Route::post('ModelList','CarModelsController@list');
 Route::resource('CarRent','CarRentController');
 Route::post('CarRent/list','CarRentController@list');
 
+Route::get('Contracts','ParkingController@ContractsController');
 Route::resource('Contracts','ContractsController');
 Route::post('Contracts/list','ContractsController@list');
+
+
 
 Route::resource('Identity','IdentityController');
 Route::post('Identity/list','IdentityController@list');
@@ -69,6 +72,7 @@ Route::post('PapiersGallery/list','PapiersGalleryController@list');
 
 Route::resource('Parking','ParkingController');
 Route::post('Parking/list','ParkingController@list');
+Route::get('Parking','ParkingController@index');
 
 Route::resource('TraitsPayment','TraitsPaymentController');
 Route::post('TraitsPayment/list','TraitsPaymentController@list');
@@ -78,6 +82,8 @@ Route::post('Vidange/list','VidangeController@list');
 
 Route::post('getCountry', 'LocatizationController@getCountry')->name('getCountry');
 Route::post('getCity', 'LocatizationController@getCity')->name('getCity');
+Route::post('getMatricules', 'ParkingController@getMatricules')->name('getMatricules');
+Route::post('getclient', 'ClientsController@getclients')->name('getclients');
 /* Route::resource([
     'Address' => 'AddressController',
     'AgenceInfo' => 'AgenceInfoController',

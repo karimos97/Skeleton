@@ -4,7 +4,7 @@ return [
 
     'items' => [
         [],
-        [
+        /* [
             'title' => 'Dashboard',
             'root' => true,
             'page' => '/',
@@ -688,7 +688,7 @@ return [
                                     ]
                                 ]
                             ],
-                            /*[
+                            [
                                 'title' => 'Scrolling',
                                 'desc' => '',
                                 'bullet' => 'dot',
@@ -736,7 +736,7 @@ return [
                                         'icon' => ''
                                     ]
                                 ]
-                            ],*/
+                            ],
                             [
                                 'title' => 'Child Datatables',
                                 'desc' => '',
@@ -892,7 +892,7 @@ return [
                                     [
                                         'title' => 'FixedHeader',
                                         'page' => 'crud/datatables/extensions/fixedheader',
-                                    ],*/
+                                    ],
                                     [
                                         'title' => 'KeyTable',
                                         'page' => 'crud/datatables/extensions/keytable',
@@ -1350,7 +1350,7 @@ return [
                     ]
                 ]
             ]
-        ]
-    ]
+        ]*/
+    ] 
 
 ];

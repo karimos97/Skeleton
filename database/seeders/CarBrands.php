@@ -49,7 +49,6 @@ class CarBrands extends Seeder
                     array('brand_name'=>'ACREA'),
                     array('brand_name'=>'ACURA'),
                     array('brand_name'=>'AIXAM'),
-                    array('brand_name'=>'ALFA-ROMEO'),
                     array('brand_name'=>'ALPINE'),
                     array('brand_name'=>'ANHUI'),
                     array('brand_name'=>'ARO'),

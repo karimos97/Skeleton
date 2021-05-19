@@ -13,7 +13,7 @@ class ContractsController extends Controller
      */
     public function index()
     {
-        return view('pages.datatables');
+        return view('pages.contrat');
     }
     public function list(){
         $data=Contracts::all();

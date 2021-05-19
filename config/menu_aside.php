@@ -46,7 +46,7 @@ return [
                     'page'=>'listeVoitures',
                     'bullet' => 'dot',
                 ],
-                [
+/*                    [
                     'title' => 'Pricing Tables',
                     'bullet' => 'dot',
                     'submenu' => [
@@ -67,7 +67,7 @@ return [
                             'page' => 'custom/pages/pricing/pricing-4'
                         ]
                     ]
-                ],
+                ],  
                 [
                     'title' => 'Invoices',
                     'bullet' => 'dot',
@@ -157,21 +157,22 @@ return [
                             'new-tab' => true
                         ]
                     ]
-                ]
+                ]*/
             ]
         ],
 
         // Layout
         [
-            'section' => 'Layout',
+            'section' => 'Parking',
         ],
         [
-            'title' => 'Themes',
+            'title' => 'Parking',
             'desc' => '',
-            'icon' => 'media/svg/icons/Design/Bucket.svg',
+            'icon' => 'fas fa-parking',
             'bullet' => 'dot',
+            'page' => 'Parking',
             'root' => true,
-            'submenu' => [
+/*             'submenu' => [
                 [
                     'title' => 'Light Aside',
                     'page' => 'layout/themes/aside-light'
@@ -180,9 +181,9 @@ return [
                     'title' => 'Dark Header',
                     'page' => 'layout/themes/header-dark'
                 ]
-            ]
-        ],
-        [
+            ] */
+        ]/*,
+         [
             'title' => 'Subheaders',
             'desc' => '',
             'icon' => 'media/svg/icons/Code/Compiling.svg',
@@ -210,7 +211,7 @@ return [
                     'page' => 'layout/subheader/none'
                 ]
             ]
-        ],
+        ], 
         [
             'title' => 'General',
             'icon' => 'media/svg/icons/General/Settings-1.svg',
@@ -709,7 +710,7 @@ return [
                         [
                             'title' => 'FixedHeader',
                             'page' => 'crud/datatables/extensions/fixedheader',
-                        ],*/
+                        ],
                         [
                             'title' => 'KeyTable',
                             'page' => 'crud/datatables/extensions/keytable',
@@ -1119,7 +1120,7 @@ return [
                     'page' => 'features/miscellaneous/idle-timer'
                 ]
             ]
-        ]
+        ]*/
     ]
 
 ];

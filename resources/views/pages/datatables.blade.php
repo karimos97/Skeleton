@@ -369,7 +369,7 @@
                          <div class="row">
                           <div class="col-lg-4"></div>
                           <div class="col-lg-8">
-                           <button type="reset" class="btn btn-primary mr-2" @click="sendData()">Submit</button>
+                           <button type="button" class="btn btn-primary mr-2" @click="sendData()">Submit</button>
                            <button type="reset" class="btn btn-secondary">Cancel</button>
                           </div>
                          </div>
