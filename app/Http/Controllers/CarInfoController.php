@@ -90,7 +90,7 @@ class CarInfoController extends Controller
         return CarInfo::join('car_brands','car_brands.id','car_infos.band_id')
         ->join('car_models','car_models.id','car_infos.model_id')
         ->select(['car_infos.*','car_brands.brand_name','car_models.model_name'])
-        ->where('car_infos.id',$id)->toJson();
+        ->where('car_infos.id',$id)->get()->toJson();
     }
 
     /**

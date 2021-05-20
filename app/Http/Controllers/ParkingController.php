@@ -68,6 +68,11 @@ class ParkingController extends Controller
 
     }
 
+    public function returnCar(Request $request){
+        //dd($request->all());
+        Contrats::find(intval($request->car))->update(['date_retourn'=>Carbon::createFromFormat('d/m/Y',strval($request->date))->toDateString(),'resturn_km'=>$request->kilo,'rest'=>$request->rest]);
+        Parking::where('car_id',intval($request->car))->update(['dispo'=>1]);
+    }
     /**
      * Display the specified resource.
      *

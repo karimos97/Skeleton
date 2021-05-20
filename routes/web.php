@@ -72,6 +72,8 @@ Route::post('PapiersGallery/list','PapiersGalleryController@list');
 
 Route::resource('Parking','ParkingController');
 Route::post('Parking/list','ParkingController@list');
+Route::post('Parking/returnedCar','ParkingController@returnCar');
+Route::post('Parking/printContract/{id}','ContractsController@printContact');
 Route::get('Parking','ParkingController@index');
 
 Route::resource('TraitsPayment','TraitsPaymentController');

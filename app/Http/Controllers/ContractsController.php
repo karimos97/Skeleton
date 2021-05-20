@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
-use App\Models\Contracts;
+use App\Models\Contrats;
+use App\Models\CarInfo;
+use DB;
 class ContractsController extends Controller
 {
     /**
@@ -11,12 +13,9 @@ class ContractsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('pages.contrat');
-    }
+
     public function list(){
-        $data=Contracts::all();
+        $data=Contrats::all();
         return Datatables::of($data)->toJson();
     }
 
@@ -38,7 +37,7 @@ class ContractsController extends Controller
      */
     public function store(Request $request)
     {
-        return Contracts::create($request->all());
+        return Contrats::create($request->all());
     }
 
     /**
@@ -49,7 +48,18 @@ class ContractsController extends Controller
      */
     public function show($id)
     {
-        return Contracts::find($id)->toJson();
+        return Contrats::find($id)->toJson();
+    }
+
+    public function printContact($id){
+        $data=CarInfo::join('car_brands','car_brands.id','car_infos.band_id')
+        ->join('contrats','contrats.matricule','car_infos.matricul')
+        ->join('clients','clients.id','contrats.client_id')
+        ->join('car_models','car_models.id','car_infos.model_id')
+        ->select(['car_infos.*','clients.*','car_models.model_name',
+        DB::raw('(select dispo from parkings where car_id=car_infos.id) as dispo'),
+        DB::raw('(select date_retourn from contrats where matricule=car_infos.matricul order by date_retourn desc limit 1) as retDate')])->get();
+        return view('pages.contrat',['data'=>$data]);
     }
 
     /**
@@ -60,7 +70,7 @@ class ContractsController extends Controller
      */
     public function edit($id)
     {
-        return Contracts::find($id)->toJson();
+        return Contrats::find($id)->toJson();
     }
 
     /**
@@ -72,7 +82,7 @@ class ContractsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Contracts::find($id)->update($request->all());
+        return Contrats::find($id)->update($request->all());
     }
 
     /**
@@ -83,6 +93,6 @@ class ContractsController extends Controller
      */
     public function destroy($id)
     {
-        return Contracts::find($id)->delete();
+        return Contrats::find($id)->delete();
     }
 }

@@ -357,6 +357,65 @@
         </div>
     </div>
 
+
+
+
+    <div class="modal fade" id="carReturn" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Retourner Une Voiture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="RturnCar">
+                        <input type="text" name="car" id="contract" hidden value="">
+                        <div class="card-body">
+                         <div class="form-group row">
+                          <div class="col-lg-4">
+                           <label>Kilometrage:</label>
+                           <input type="number" class="form-control" name="kilo"  placeholder="Kilometrage Actuelle"/>
+                           <span class="form-text text-muted">Entrer Le Actuelle</span>
+                          </div>
+                          <div class="col-lg-4">
+                            <label>Date Retourn:</label>
+                            <div class="input-group">
+                             <div class="input-group date" >
+                                 <input type="text" name="date" class="form-control date-p" readonly  value="" id="kt_datepicker_3"/>
+                                 <div class="input-group-append">
+                                  <span class="input-group-text">
+                                   <i class="la la-calendar"></i>
+                                  </span>
+                                 </div>
+                                </div>                            </div>
+                            <span class="form-text text-muted">Entrer La Date  De Retourn</span>
+                           </div>
+                           <div class="col-lg-4">
+                            <label> Rest:</label>
+                            <div class="input-group">
+                                 <input type="number" name="rest" class="form-control"   value="" id="rest"/>
+                           </div>
+                            <span class="form-text text-muted">Tapez le Montant qui Reste</span>
+                           </div>
+                         </div>
+                        </div>
+                        <div class="card-footer">
+                         <div class="row">
+                          <div class="col-lg-4"></div>
+                          <div class="col-lg-8">
+                           <button type="button" class="btn btn-primary mr-2" onclick="returnCar()">Submit</button>
+                           <button type="reset" class="btn btn-secondary">Cancel</button>
+                          </div>
+                         </div>
+                        </div>
+                       </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>   
 @endsection
 
 {{-- Styles Section --}}
