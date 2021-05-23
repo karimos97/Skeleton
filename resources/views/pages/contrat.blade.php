@@ -12,7 +12,7 @@
     <link href="https://alpha.delivered.ma/css/app-print.css" rel="stylesheet">
 
     <title>Printer</title>
-    <style>
+    <style> 
         @media print{
             .col-md-1{flex:0 0 auto;width:8.3333333333%}.col-md-2{flex:0 0 auto;width:16.6666666667%}.col-md-3{flex:0 0 auto;width:25%}.col-md-4{flex:0 0 auto;width:33.3333333333%}.col-md-5{flex:0 0 auto;width:41.6666666667%}.col-md-6{flex:0 0 auto;width:50%}.col-md-7{flex:0 0 auto;width:58.3333333333%}.col-md-8{flex:0 0 auto;width:66.6666666667%}.col-md-9{flex:0 0 auto;width:75%}.col-md-10{flex:0 0 auto;width:83.3333333333%}.col-md-11{flex:0 0 auto;width:91.6666666667%}.col-md-12{flex:0 0 auto;width:100%}
         }
@@ -36,7 +36,7 @@
             margin: 0;
             background: #fff;
             color:#000!important;
-            border:1px solid #000;
+            
             position: relative;
 
             page-break-after: always;
@@ -83,6 +83,9 @@
   </head>
   <body>
 
+     @foreach ($datas as $data)
+         
+
         <div class="page">
         <div class="row">
             <div class="col">
@@ -94,7 +97,7 @@
 
         </div>
         <div>
-            <div class="order_id text-center"> N° Contracts:  </div>
+            <div class="order_id text-center"> N° Contracts: {{$data->id}} </div>
         </div>
         <div class="box">
             <div class="title">Client:</div>
@@ -112,13 +115,13 @@
                 </div>
                 <div class="col-8">
 
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div>{{$data->fname.' '.$data->lname}}</div>
+                    <div>{{$data->date_birth}}</div>
+                    <div>{{$data->name}}</div>
+                    <div>{{$data->phone1}}</div>
+                    <div>{{$data->cin}}</div>
+                    <div>{{$data->passport}}</div>
+                    <div>{{$data->permis}}</div>
 
 
                 </div>
@@ -142,21 +145,21 @@
                 </div>
                 <div class="col-8">
 
-                    <div> </div>
-                    <div></div>
-                    <div></div>
-                    <div> </div>
-                    <div></div>
-                    <div></div>
-                    <div> </div>
-                    <div></div>
-                    <div></div>
+                    <div>{{$data->brand_name.' '.$data->model_name}}</div>
+                    <div>{{$data->matricul}}</div>
+                    <div>{{date('Y-m-d H:i',strtotime($data->date_sorti))}}</div>
+                    <div>{{date('Y-m-d H:i',strtotime($data->date_retourn))}}</div>
+                    <div>{{$data->duree}}</div>
+                    <div>Agence</div>
+                    <div>{{$data->day_cost}} DH</div>
+                    <div>{{$data->total_cost}}</div>
+                    <div>0</div>
 
 
                 </div>
             </div>
         </div>
-        <div class="box">
+        <div class="box" style="border-bottom: none;">
             <div class="title">LOCATAIRE:</div>
 
             <div class="row">
@@ -164,6 +167,10 @@
                     <div> CACHET ET SIGNATURE: </div>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
             <div class="row">
                 <div class="col-12 text-center">J'AI PRIS CONNAISSANCE DES CONDITIONS STIPULEES AU VERSO</div>
             </div>
@@ -171,10 +178,9 @@
                 <div class="col-md-12 text-center" >SIGNATURE</div>
             </div>
         </div>
-
-
-
     </div>
+
+    @endforeach
 
 
 
@@ -186,6 +192,15 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
+    <script>
 
+
+
+        document.onreadystatechange = function () {
+            if (document.readyState === 'interactive') {
+              window.print()
+            }
+         }
+    </script>
   </body>
 </html>

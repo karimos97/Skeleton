@@ -115,6 +115,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
+  
         return Clients::join('addresses','addresses.client_id','clients.id')
                       ->join('identities','identities.client_id','clients.id')
                       ->join('countries','addresses.country','countries.id')

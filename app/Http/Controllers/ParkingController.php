@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
 use App\Models\Parking;
-use App\Models\CarInfo;
+use App\Models\carInfo;
 use App\Models\Contrats;
+use App\Models\CarRentHestory;
 use DB;
 use Carbon\Carbon;
 
@@ -23,7 +24,7 @@ class ParkingController extends Controller
     public function list(){ 
         $data= CarInfo::join('car_brands','car_brands.id','car_infos.band_id')
         ->join('car_models','car_models.id','car_infos.model_id')
-        ->select(['car_infos.*','car_brands.brand_name','car_models.model_name',DB::raw('(select dispo from parkings where car_id=car_infos.id) as dispo'),DB::raw('(select date_retourn from contrats where matricule=car_infos.matricul order by date_retourn desc limit 1) as retDate')]);
+        ->select(['car_infos.*','car_brands.brand_name','car_models.model_name',DB::raw('(select dispo from parkings where car_id=car_infos.id) as dispo'),DB::raw('(select date_retourn from contrats where matricule=car_infos.matricul order by id desc limit 1) as retDate')]);
         return Datatables::of($data)->toJson();
     }
 
@@ -47,8 +48,8 @@ class ParkingController extends Controller
     public function store(Request $request)
     {
 
-        $sorti=Carbon::createFromFormat('d/m/Y',strval($request->dateSortie))->toDateString();
-        $return=Carbon::createFromFormat('d/m/Y',strval($request->dateReturn))->toDateString();
+        $sorti=Carbon::createFromFormat('d/m/Y H:i',strval($request->dateSortie))->toDateTimeString();
+        $return=Carbon::createFromFormat('d/m/Y H:i',strval($request->dateReturn))->toDateTimeString();
         $car=CarInfo::find($request->voiture);
         $cert=Contrats::create(['matricule'=>$car->matricul,
         'duree'=>intval($request->duree),
@@ -64,6 +65,7 @@ class ParkingController extends Controller
         'client_id'=>intval($request->client),
         'user_id'=>1]);
         Parking::where('car_id',$car->id)->update(['dispo'=>0]);
+        CarRentHestory::create(['matricule'=>$car->matricul,'date_rent'=>$sorti,'date_retour'=>$return,'dure'=>intval($request->duree),'client_id'=>intval($request->client),'user_id'=>1]);
         return $cert;
 
     }

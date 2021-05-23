@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
-use App\Models\CarInfo;
+use App\Models\carInfo;
 use App\Models\carGallery;
 use App\Models\Parking;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +47,6 @@ class CarInfoController extends Controller
      */
     public function store(Request $request)
     {
-        
         
         $info= CarInfo::create(['matricul'=>$request->matricule,
         'body_number'=>$request->vin,

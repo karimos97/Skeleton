@@ -89,7 +89,7 @@
                         <th>Crrburant</th>
                         <th>Date Retour</th>
                         <th></th>
-                        
+
 
                     </tr>
                 </thead>
@@ -98,7 +98,7 @@
         </div>
 
     </div>
-    <div  class="modal fade" id="AddCar" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+    <div  class="modal fade" id="AddCar"  role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -137,10 +137,15 @@
                           <div class="col-lg-4">
                            <label>Date De Sorti:</label>
                            <div class="input-group">
-                            <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control date" readonly value="" name="dateSortie" required v-model="contract.exit" placeholder=""/>
+                            <div class="input-group " id="kt_datetimepicker_2" data-target-input="nearest">
+                                <input type="text" name="dateSortie" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_2"/>
+                                <div class="input-group-append" data-target="#kt_datetimepicker_2" data-toggle="datetimepicker">
+                                 <span class="input-group-text">
+                                  <i class="ki ki-calendar"></i>
+                                 </span>
+                                </div>
+                            </div>
                            </div>
-                           <span class="form-text text-muted">Entrer La Date Sortie</span>
                           </div>
                          </div>
                          <div class="form-group row">
@@ -170,14 +175,15 @@
                           <div class="col-lg-4">
                             <label>Date Retourn:</label>
                             <div class="input-group">
-                             <div class="input-group date" >
-                                 <input type="text" name="dateReturn"  class="form-control date" required readonly value="" v-model="contract.return"  />
-                                 <div class="input-group-append">
-                                  <span class="input-group-text">
-                                   <i class="la la-calendar"></i>
-                                  </span>
-                                 </div>
-                                </div>                            </div>
+                                <div class="input-group " id="kt_datetimepicker_3" data-target-input="nearest">
+                                    <input type="text" name="dateReturn" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
+                                    <div class="input-group-append" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker">
+                                     <span class="input-group-text">
+                                      <i class="ki ki-calendar"></i>
+                                     </span>
+                                    </div>
+                                </div> 
+                             </div>
                             <span class="form-text text-muted">Entrer La Date Retourn</span>
                            </div>
 
@@ -229,7 +235,7 @@
 
 
 
-    <div class="modal fade" id="EditCar" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+    <div class="modal fade" id="EditCar" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -360,7 +366,7 @@
 
 
 
-    <div class="modal fade" id="carReturn" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+    <div class="modal fade" id="carReturn" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">

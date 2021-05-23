@@ -11,6 +11,7 @@
                     <div class="text-muted pt-2 font-size-sm"></div>
                 </h3>
             </div>
+            <button type="button" id="ReloadTab" hidden onclick="reloadTable()"></button>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
                 <div class="dropdown dropdown-inline mr-2">
@@ -159,7 +160,7 @@
         </div>
 
     </div>
-    <div class="modal fade" id="AddClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+    <div class="modal fade" id="AddClient"  role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -174,19 +175,19 @@
                          <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Nom:</label>
-                           <input type="text" class="form-control" name="fname" v-model="client.fname" placeholder="Nom Client"/>
-                           <span class="form-text text-muted">Entrer Le Nom De Client</span>
+                           <input type="text" class="form-control" name="fname" v-model="client.fname" required  placeholder="Nom Client"/>
+                           <span class="form-text text-muted">Entrer Le Nom De Client</span> 
                           </div>
                           <div class="col-lg-4">
                            <label>Prenom:</label>
-                           <input type="text" class="form-control" name="lname" v-model="client.lname" placeholder="Prenom Client"/>
+                           <input type="text" class="form-control" name="lname" v-model="client.lname"  required holder="Prenom Client"/>
                            <span class="form-text text-muted">Entrer Le Prenom De Client</span>
                           </div>
                           <div class="col-lg-4">
                            <label>Email:</label>
                            <div class="input-group">
                             <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control" name="email" v-model="client.email" placeholder=""/>
+                            <input type="text" class="form-control"  name="email" v-model="client.email" placeholder=""/>
                            </div>
                            <span class="form-text text-muted">Entrer Le Email De Client</span>
                           </div>
@@ -202,7 +203,7 @@
                            <label>Date Nissance:</label>
                            <div class="input-group">
                             <div class="input-group date" >
-                                <input type="text" name="date" class="form-control date-p" readonly  v-model="client.date" value="" id="kt_datepicker_3"/>
+                                <input type="text" name="date" class="form-control date-p" readonly required  v-model="client.date" value="" id="kt_datepicker_3"/>
                                 <div class="input-group-append">
                                  <span class="input-group-text">
                                   <i class="la la-calendar"></i>
@@ -214,7 +215,7 @@
                           <div class="col-lg-4">
                            <label>Address:</label>
                            <div class="input-group">
-                            <input type="text" class="form-control" name="address" v-model="client.address" placeholder="Enter your address"/>
+                            <input type="text" class="form-control" required name="address" v-model="client.address" placeholder="Enter your address"/>
                             <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
                            </div>
                            <span class="form-text text-muted">Entre l'address de Client</span>
@@ -234,7 +235,7 @@
                             <label>Ville:</label>
                             <div class="input-group">
 
-                             <select class="form-control select2 Ville myCity" name="city" v-model="client.city"  style="width:100% !important;">
+                             <select class="form-control select2 Ville myCity"  required name="city" v-model="client.city"  style="width:100% !important;">
                              </select>
                             </div>
                             <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
@@ -261,7 +262,7 @@
                                 <div class="input-group">
                                    <div v-if="permisUploaded" class="bg-black-10 pa2 flex">
                                     <figure class="mv0 ml0 mr3 relative flex items-center justify-center" v-for="(photo, $index) in permis">
-                                      <button @click="removePhoto($index,'permis')" dataid="permis" class="button-reset pointer dim bn bg-black h2 w2 br-100 white flex items-center justify-center absolute absolute--fill-l center">
+                                      <button @click="removePhoto($index,'permis')" dataid="permis"   class="button-reset pointer dim bn bg-black h2 w2 br-100 white flex items-center justify-center absolute absolute--fill-l center">
                                         <i class="la la-close"></i>
                                      </button>
                                       <img v-bind:src="photo" class="h3 w3" alt="Uploaded photo">
@@ -318,7 +319,7 @@
                             <div class="col-lg-4">
                                 <label>N°Permis:</label>
                                 <div class="input-group">
-                                    <input type="text" required name="npermis" class="form-control" v-model="client.npermis" placeholder="" />
+                                    <input type="text" required name="npermis" required class="form-control" v-model="client.npermis" placeholder="" />
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -380,7 +381,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="EditClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
+    <div class="modal fade" id="EditClient"  role="dialog" aria-labelledby="exampleModalSizeXl" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -396,12 +397,12 @@
                          <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Nom:</label>
-                           <input type="text" class="form-control" name="fname" v-model="Cl.fname" placeholder="Nom Client"/>
+                           <input type="text" class="form-control" required name="fname" v-model="Cl.fname" placeholder="Nom Client"/>
                            <span class="form-text text-muted">Entrer Le Nom De Client</span>
                           </div>
                           <div class="col-lg-4">
                            <label>Prenom:</label>
-                           <input type="text" class="form-control" name="lname" v-model="Cl.lname" placeholder="Prenom Client"/>
+                           <input type="text" class="form-control" required name="lname" v-model="Cl.lname" placeholder="Prenom Client"/>
                            <span class="form-text text-muted">Entrer Le Prenom De Client</span>
                           </div>
                           <div class="col-lg-4">
@@ -424,7 +425,7 @@
                            <label>Date Nissance:</label>
                            <div class="input-group">
                             <div class="input-group date" >
-                                <input type="text" name="date" class="form-control date-p" readonly  v-model="Cl.date_birth" value="" id="kt_datepicker_3"/>
+                                <input type="text" name="date" required class="form-control date-p" readonly  v-model="Cl.date_birth" value="" id="kt_datepicker_3"/>
                                 <div class="input-group-append">
                                  <span class="input-group-text">
                                   <i class="la la-calendar"></i>
@@ -436,7 +437,7 @@
                           <div class="col-lg-4">
                            <label>Address:</label>
                            <div class="input-group">
-                            <input type="text" class="form-control" name="address" v-model="Cl.address" placeholder="Enter your address"/>
+                            <input type="text" class="form-control" name="address" required v-model="Cl.address" placeholder="Enter your address"/>
                             <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
                            </div>
                            <span class="form-text text-muted">Entre l'address de Client</span>
@@ -456,7 +457,7 @@
                             <label>Ville:</label>
                             <div class="input-group">
 
-                             <select class="form-control select2 Ville myCity" name="city" v-model="Cl.city"  style="width:100% !important;">
+                             <select class="form-control select2 Ville myCity" required name="city" v-model="Cl.city"  style="width:100% !important;">
                              </select>
                             </div>
                             <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
@@ -546,13 +547,13 @@
                             <div class="col-lg-4">
                                 <label>N°Cin:</label>
                                 <div class="input-group">
-                                    <input type="text" required name="ncin" class="form-control" v-model="Cl.cin" placeholder="" />
+                                    <input type="text"  name="ncin" class="form-control" v-model="Cl.cin" placeholder="" />
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <label>N°Passport:</label>
                                 <div class="input-group">
-                                    <input type="text" required name="npassport" class="form-control" v-model="Cl.passport" placeholder="" />
+                                    <input type="text"  name="npassport" class="form-control" v-model="Cl.passport" placeholder="" />
                                 </div>
                             </div>
                          </div>
@@ -577,7 +578,7 @@
                                 <label>Tele:</label>
                                 <div class="input-group">
                                  <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                                 <input type="text" name="phone" class="form-control" v-model="Cl.phone" placeholder="Enter your postcode"/>
+                                 <input type="text" name="phone" required class="form-control" v-model="Cl.phone" placeholder="Enter your postcode"/>
                                 </div>
                                 <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
                                </div>
@@ -623,5 +624,5 @@
 
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pages/clients-vue/permis.js') }}" type="text/javascript"></script>
-
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 @endsection

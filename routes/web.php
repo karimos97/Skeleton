@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 Route::get('/', 'PagesController@index');
 
 Route::resource('Clients','ClientsController');
@@ -73,7 +73,7 @@ Route::post('PapiersGallery/list','PapiersGalleryController@list');
 Route::resource('Parking','ParkingController');
 Route::post('Parking/list','ParkingController@list');
 Route::post('Parking/returnedCar','ParkingController@returnCar');
-Route::post('Parking/printContract/{id}','ContractsController@printContact');
+Route::get('Parking/printContract/{id}','ContractsController@printContact');
 Route::get('Parking','ParkingController@index');
 
 Route::resource('TraitsPayment','TraitsPaymentController');
