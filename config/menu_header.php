@@ -3,7 +3,10 @@
 return [
 
     'items' => [
-        [],
+        [
+
+
+        ],
         /* [
             'title' => 'Dashboard',
             'root' => true,

@@ -3,22 +3,23 @@
         @yield('content')
     </div>
 @else
-
+@if (Auth::id())
     @include('layout.base._header-mobile')
-
+@endif
     <div class="d-flex flex-column flex-root">
         <div class="d-flex flex-row flex-column-fluid page">
-
-            @if(config('layout.aside.self.display'))
-                @include('layout.base._aside')
-            @endif
-
+            @if (Auth::id())
+            
+                    @if(config('layout.aside.self.display'))
+                        @include('layout.base._aside')
+                    @endif
+             @endif
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-
-                @include('layout.base._header')
-
+                @if (Auth::id())
+                    @include('layout.base._header')
+                @endif
                 <div class="content {{ Metronic::printClasses('content', false) }} d-flex flex-column flex-column-fluid" id="kt_content">
-
+                @if (Auth::id())
                     @if(config('layout.subheader.display'))
                         @if(array_key_exists(config('layout.subheader.layout'), config('layout.subheader.layouts')))
                             @include('layout.partials.subheader._'.config('layout.subheader.layout'))
@@ -26,16 +27,18 @@
                             @include('layout.partials.subheader._'.array_key_first(config('layout.subheader.layouts')))
                         @endif
                     @endif
+                @endif
 
                     @include('layout.base._content')
                 </div>
-
-                @include('layout.base._footer')
+                @if (Auth::id())
+                    @include('layout.base._footer')
+                @endif  
             </div>
         </div>
     </div>
+    @endif
 
-@endif
 
 @if (config('layout.self.layout') != 'blank')
 

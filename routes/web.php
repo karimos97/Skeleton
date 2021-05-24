@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('/', 'PagesController@index');
-
+Route::get('/', 'PagesController@index')->name('home');
+Route::get('/home', function () {
+    return redirect('/');
+    
+});
 Route::resource('Clients','ClientsController');
 Route::post('Clients/list','ClientsController@list');
 Route::get('listeNoire','ListedClientController@index');

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Pages;
 class PagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $page_title = 'Dashboard';

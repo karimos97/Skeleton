@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Address;
 class AddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

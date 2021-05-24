@@ -11,6 +11,11 @@ use Carbon\Carbon;
 
 class ClientsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +49,9 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
        // dd($request->all());
+       try {
+           //code...
+
         $dt=Carbon::createFromFormat('d/m/Y',strval($request->date))->toDateString();
 
         $sex=$request->sex[0];
@@ -103,6 +111,9 @@ class ClientsController extends Controller
              }
 
             return response()->json(['Message'=>'New Client Added Successfuly','Error'=>false]);
+        } catch (\Throwable $th) {
+             return response()->json(['Message'=>$th->getMessage()],500);
+        }
 
     }
 

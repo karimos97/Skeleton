@@ -8,7 +8,10 @@ use App\Models\Region;
 use App\Models\Country;
 class LocatizationController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function getCountry(Request $request)
     {
         return Country::where('name', 'LIKE', '%' . $request->get('q') . '%')->paginate(10);

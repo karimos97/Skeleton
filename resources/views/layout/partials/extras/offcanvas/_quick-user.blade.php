@@ -24,10 +24,13 @@
             </div>
             <div class="d-flex flex-column">
                 <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-					James Jones
+					@if (Auth::id())
+						{{Auth::user()->name}}
+					@endif
+					
 				</a>
                 <div class="text-muted mt-1">
-                    Application Developer
+                    Agence Manager
                 </div>
                 <div class="navi mt-2">
                     <a href="#" class="navi-item">
@@ -35,7 +38,11 @@
                             <span class="navi-icon mr-1">
 								{{ Metronic::getSVG("media/svg/icons/Communication/Mail-notification.svg", "svg-icon-lg svg-icon-primary") }}
 							</span>
-                            <span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+                            <span class="navi-text text-muted text-hover-primary">
+								@if (Auth::id())
+									{{Auth::user()->email}}
+									@endif
+							</span>
                         </span>
                     </a>
                 </div>
@@ -122,6 +129,30 @@
 		                </div>
 		            </div>
 		        </div>
+		    </a>
+		    {{-- Item --}}
+		    <a href="{{ route('logout') }}" class="navi-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+		        <div class="navi-link">
+					<div class="symbol symbol-40 bg-light mr-3">
+						<div class="symbol-label">
+							{{ Metronic::getSVG("media/svg/icons/Home/Door-open.svg", "svg-icon-md svg-icon-danger") }}
+						</div>
+				   	</div>
+		            <div class="navi-text">
+		                <div class="font-weight-bold">
+		                    Se déconnecter
+		                </div>
+		                <div class="text-muted">
+		                    Fermer cette Session
+		                </div>
+		            </div>
+		        </div>
+
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+					@csrf
+				</form>
+
+
 		    </a>
 		</div>
 
