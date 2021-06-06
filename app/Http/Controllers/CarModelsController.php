@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
-use App\Models\CarModels;
+use App\Models\carModels;
+
 class CarModelsController extends Controller
 {
     public function __construct()
@@ -20,7 +21,7 @@ class CarModelsController extends Controller
         return view('pages.datatables');
     }
     public function list(Request $request){
-        return CarModels::where('model_name', 'LIKE', '%' . $request->get('q') . '%')
+        return carModels::where('model_name', 'LIKE', '%' . $request->get('q') . '%')
                         ->where('brand_id',$request->brand)->paginate(10);
     }
 
@@ -43,7 +44,7 @@ class CarModelsController extends Controller
      */
     public function store(Request $request)
     {
-        return CarModels::create($request->all());
+        return carModels::create($request->all());
     }
 
     /**
@@ -54,7 +55,7 @@ class CarModelsController extends Controller
      */
     public function show($id)
     {
-        return CarModels::find($id)->toJson();
+        return carModels::find($id)->toJson();
     }
 
     /**
@@ -65,7 +66,7 @@ class CarModelsController extends Controller
      */
     public function edit($id)
     {
-        return CarModels::find($id)->toJson();
+        return carModels::find($id)->toJson();
     }
 
     /**
@@ -77,7 +78,7 @@ class CarModelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return CarModels::find($id)->update($request->all());
+        return carModels::find($id)->update($request->all());
     }
 
     /**
@@ -88,6 +89,6 @@ class CarModelsController extends Controller
      */
     public function destroy($id)
     {
-        return CarModels::find($id)->delete();
+        return carModels::find($id)->delete();
     }
 }

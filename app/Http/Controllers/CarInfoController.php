@@ -50,8 +50,14 @@ class CarInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
+    {   $credit_date=null;
+        $date_vente=null;
+        if($request->dateCredit){
+            $credit_date=Carbon::createFromFormat('d/m/Y',strval($request->dateCredit))->toDateString();
+        }
+        if($request->dateVente){
+            $date_vente=Carbon::createFromFormat('d/m/Y',strval($request->dateVente))->toDateString();
+        }
         $info= CarInfo::create(['matricul'=>$request->matricule,
         'body_number'=>$request->vin,
         'color'=>$request->color,
@@ -59,8 +65,8 @@ class CarInfoController extends Controller
         'maisson_achat'=>$request->maison,
         'rate_credit'=>floatval($request->creditRate),
         'car_price'=>floatval($request->prixAchat),
-        'credit_date'=>Carbon::createFromFormat('d/m/Y',strval($request->dateCredit))->toDateString(),
-        'date_vente'=>Carbon::createFromFormat('d/m/Y',strval($request->dateVente))->toDateString(),
+        'credit_date'=>$credit_date,
+        'date_vente'=>$date_vente,
         'prix_vente'=>floatval($request->prixVente),
         'transmission'=>$request->trans[0],
         'carrburant'=>$request->carb,
@@ -80,6 +86,8 @@ class CarInfoController extends Controller
                 $primg = carGallery::create(['car_id'=>$info->id,'path' => $path,'user_id'=>1]);
             }
         }
+
+        return response()->json(['Message'=>'Nouvelle Voiture a Été Ajoutée a Votre Garage']);
     }
 
     /**

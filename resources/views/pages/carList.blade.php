@@ -3,7 +3,16 @@
 <link rel="stylesheet" href="{{ asset('css/tachyons.min.css') }}">
 {{-- Content --}}
 @section('content')
-
+<style>
+    .error{
+        border-color: #dc3545;
+        color: red !important;
+    }
+    .valid{
+        border-color: #28a745;
+        color: #28a745 !important;
+    }
+</style>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
@@ -179,31 +188,24 @@
 
                             <div class="col-lg-4">
                                 <label>Marque:</label>
-                                <div class="input-group">
                                     <input type="hidden" id="brnd" name="brand" value="">
                                  <select class="form-control  m-select2 carBrand" name="brandId" v-model="car.brand"  style="width:100% !important;">
                                  </select>
-                                </div>
                                 <span class="form-text text-muted">Entrer La Marque </span>
                                </div>
                               <div class="col-lg-4">
                                 <label>Model:</label>
-                                <div class="input-group">
                                     <input type="hidden" id="mdl" name="model" value="">
-                                 <select required class="form-control m-select2 carModel"
-                                            style="width:100% !important;" name="modelId" v-model="car.model"  required>
+                                 <select  class="form-control m-select2 carModel"
+                                            style="width:100% !important;" name="modelId" v-model="car.model"  >
                                     </select>
-                                </div>
                                 <span class="form-text text-muted">Entrer Le Model</span>
                                </div>
 
 
                           <div class="col-lg-4">
                            <label>Date Fabrication:</label>
-                           <div class="input-group">
-                            <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control date" readonly value="" name="dateModel" required v-model="car.dateModel" placeholder=""/>
-                           </div>
+                            <input     data-target="#kt_datepicker" data-toggle="datetimepicker" type="text"  id="kt_datepicker" name="dateModel" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
                            <span class="form-text text-muted">Entrer La Date Fabrication</span>
                           </div>
                          </div>
@@ -211,20 +213,18 @@
 
                             <div class="col-lg-4">
                                 <label>Matricule:</label>
-                                <input type="text" class="form-control" name="matricule" v-model="car.maticul" required placeholder="Nom Client"/>
+                                <input type="text" class="form-control" name="matricule"   placeholder="Nom Client"/>
                                 <span class="form-text text-muted">Entrer La matricule</span>
                                </div>
                                <div class="col-lg-4">
                                 <label>Code VIN:</label>
-                                <input type="text" class="form-control" required name="vin" v-model="car.vin" placeholder="Prenom Client"/>
+                                <input type="text" class="form-control"  name="vin"  placeholder="Prenom Client"/>
                                 <span class="form-text text-muted">Entrer Le Code VIN</span>
                                </div>
 
                             <div class="col-lg-4">
                                 <label>Coleur:</label>
-                                <div class="input-group">
-                                    <input type="color" required name="color" class="form-control" v-model="car.color" placeholder="" />
-                                </div>
+                                    <input type="color"  name="color" class="form-control"  placeholder="" />
                             </div>
 
 
@@ -233,52 +233,33 @@
 
                           <div class="col-lg-4">
                             <label>Date Achat:</label>
-                            <div class="input-group">
-                             <div class="input-group date" >
-                                 <input type="text" name="dateAchat"  class="form-control date" required readonly value="" v-model="car.dateAchat"  />
-                                 <div class="input-group-append">
-                                  <span class="input-group-text">
-                                   <i class="la la-calendar"></i>
-                                  </span>
-                                 </div>
-                                </div>                            </div>
+                                 <input type="text"  data-target="#dateAchat" id="dateAchat"  data-toggle="datetimepicker" name="dateAchat"  class="form-control"   value=""   />
                             <span class="form-text text-muted">Entrer La Date Achat</span>
                            </div>
 
                            <div class="col-lg-4">
                             <label>Prix Achat:</label>
-                            <div class="input-group">
-                                <input type="number" step="0.01" class="form-control" name="prixAchat"  required v-model="car.prixAchat">
-                            </div>
+                                <input type="number" step="0.01" class="form-control" name="prixAchat" >
                             <span class="form-text text-muted">Entrer Le Prix Achat:</span>
                            </div>
 
                            <div class="col-lg-4">
                             <label>Maison:</label>
-                            <div class="input-group">
-                             <input type="text" class="form-control" name="maison" v-model="car.maison" placeholder="Enter your address"/>
-                             <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-                            </div>
+                             <input type="text" class="form-control" name="maison" placeholder="Enter your address"/>
                             <span class="form-text text-muted">Entre la Maison d'achat</span>
                            </div>
                         </div>
                          <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Date Credit:</label>
-                           <div class="input-group">
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                            <input type="text" readonly value="" name="dateCredit" class="form-control date" v-model="car.dateCredit" placeholder="Enter your postcode"/>
-                           </div>
+                            <input type="text" readonly value=""  data-target="#dateCredit" id="dateCredit"  data-toggle="datetimepicker" name="dateCredit" class="form-control date" v-model="car.dateCredit" placeholder="Enter your postcode"/>
                            <span class="form-text text-muted">Entrer La Date de Credit</span>
                           </div>
 
 
                           <div class="col-lg-4">
                             <label>Taux Credit:</label>
-                            <div class="input-group">
-                             <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                             <input type="number" step="0.01" name="creditRate" class="form-control" v-model="car.creditRate" pattern="^\d*(\.\d{0,2})?$"  placeholder="Enter your postcode"/>
-                            </div>
+                             <input type="number" step="0.01" name="creditRate" class="form-control"  pattern="^\d*(\.\d{0,2})?$"  placeholder="Enter your postcode"/>
                             <span class="form-text text-muted">Entrer Le Taux Credit</span>
                            </div>
 
@@ -287,10 +268,9 @@
 
                           <div class="col-lg-4">
                             <label>Transmission:</label>
-                            <div class="input-group">
                                 <div class="radio-inline">
                                  <label class="radio radio-solid">
-                                  <input type="radio" name="trans[]"  v-model="car.trans" value="A"/>
+                                  <input type="radio" name="trans[]"   value="A"/>
                                   <span></span>
                                   Automatique
                                  </label>
@@ -300,44 +280,36 @@
                                   Manuel
                                  </label>
                                 </div>
-                            </div>
                             <span class="form-text text-muted">Entrer Le Type de Transmission</span>
                            </div>
                          </div>
                          <div class="form-group row">
                             <div class="col-lg-4">
                              <label>puissance:</label>
-                             <div class="input-group">
-                              <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                              <input type="number" name="puissance" class="form-control" v-model="car.puissance" required placeholder="Enter your postcode"/>
-                             </div>
+                              <input type="number" name="puissance" class="form-control"   placeholder="Enter your postcode"/>
                              <span class="form-text text-muted">Entrer La puissance</span>
                             </div>
 
                             <div class="col-lg-4">
                                 <label>Carrburant:</label>
-                                <div class="input-group">
-                                 <select name="carb" class="form-control" name="carrburant"  v-model="car.carrburant">
-                                     <option value="D">Diesel</option>
-                                     <option value="E">Essence</option>
-                                     <option value="H">Hybrid</option>
-                                     <option value="El">Electric</option>
+                                 <select name="carb" class="form-control" name="carrburant"  >
+                                     <option value="Diesel" selected>Diesel</option>
+                                     <option value="Essence">Essence</option>
+                                     <option value="Hybrid">Hybrid</option>
+                                     <option value="Electric">Electric</option>
                                  </select>
 
-                                </div>
                                 <span class="form-text text-muted">Entrer Le Type de Carrburant</span>
                                </div>
 
                             <div class="col-lg-4">
                               <label>Category:</label>
-                              <div class="input-group">
-                                  <select name="type" id="" class="form-control"  v-model="car.type">
-                                      <option value="Sedan">Sedan</option>
+                                  <select name="type" id="" class="form-control"  >
+                                      <option value="Sedan" selected>Sedan</option>
                                       <option value="Suv">Suv</option>
                                       <option value="Coupe">Coupe</option>
                                       <option value="Minivan">Minivan</option>
                                   </select>
-                              </div>
                               <span class="form-text text-muted">Entrer La Category:</span>
                              </div>
 
@@ -349,7 +321,7 @@
 
                             <div class="col-lg-4">
                                 <label>Date Vente:</label>
-                                  <input type="text" class="form-control date" readonly value="" name="dateVente" v-model="car.dateVente">
+                                  <input type="text"  data-target="#dateVente" id="dateVente"  data-toggle="datetimepicker" class="form-control date" readonly value="" name="dateVente" v-model="car.dateVente">
                                 <span class="form-text text-muted">Entrer La Date achat</span>
                                </div>
 
@@ -357,9 +329,7 @@
 
                             <div class="col-lg-4">
                               <label>Prix Vente:</label>
-                              <div class="input-group">
-                                  <input type="number" step="0.01" class="form-control" name="prixVente"  v-model="car.prixVente">
-                              </div>
+                                  <input type="number" step="0.01" class="form-control" name="prixVente" >
                               <span class="form-text text-muted">Entrer Le Prix Vente:</span>
                              </div>
 
@@ -394,7 +364,7 @@
                          <div class="form-group row">
                              <div class="col-lg-12">
                                 <label>Observation:</label>
-                                <textarea name="" v-model="car.note" name="note" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea   name="note" class="form-control" cols="30" rows="5"></textarea>
                             </div>
                          </div>
                         </div>
@@ -436,7 +406,7 @@
                                 <label>Marque:</label>
                                 <div class="input-group">
                                     <input type="hidden" id="brnd" name="brand" value="">
-                                 <select class="form-control  m-select2 carBrand" name="brandId" v-model="car.brand"  style="width:100% !important;">
+                                 <select class="form-control m-select2 carBrand" name="brandId"  style="width:100% !important;">
                                  </select>
                                 </div>
                                 <span class="form-text text-muted">Entrer La Marque </span>
@@ -445,8 +415,8 @@
                                 <label>Model:</label>
                                 <div class="input-group">
                                     <input type="hidden" id="mdl" name="model" value="">
-                                 <select required class="form-control m-select2 carModel"
-                                            style="width:100% !important;" name="modelId" v-model="car.model"  required>
+                                 <select  class="form-control m-select2 carModel"
+                                            style="width:100% !important;" name="modelId"   >
                                     </select>
                                 </div>
                                 <span class="form-text text-muted">Entrer Le Model</span>
@@ -457,7 +427,7 @@
                            <label>Date Fabrication:</label>
                            <div class="input-group">
                             <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control date" readonly value="" name="dateModel" required v-model="car.date_buy" placeholder=""/>
+                            <input type="text" class="form-control date" readonly value="" name="dateModel"  v-model="car.date_buy" placeholder=""/>
                            </div>
                            <span class="form-text text-muted">Entrer La Date Fabrication</span>
                           </div>
@@ -466,19 +436,19 @@
 
                             <div class="col-lg-4">
                                 <label>Matricule:</label>
-                                <input type="text" class="form-control" name="matricule" v-model="car.matricul" required placeholder="Nom Client"/>
+                                <input type="text" class="form-control" name="matricule" v-model="car.matricul"  placeholder="Nom Client"/>
                                 <span class="form-text text-muted">Entrer La matricule</span>
                                </div>
                                <div class="col-lg-4">
                                 <label>Code VIN:</label>
-                                <input type="text" class="form-control" required name="vin" v-model="car.body_number" placeholder="Prenom Client"/>
+                                <input type="text" class="form-control"  name="vin" v-model="car.body_number" placeholder="Prenom Client"/>
                                 <span class="form-text text-muted">Entrer Le Code VIN</span>
                                </div>
 
                             <div class="col-lg-4">
                                 <label>Coleur:</label>
                                 <div class="input-group">
-                                    <input type="color" required name="color" class="form-control" v-model="car.color" placeholder="" />
+                                    <input type="color"  name="color" class="form-control" v-model="car.color" placeholder="" />
                                 </div>
                             </div>
 
@@ -490,7 +460,7 @@
                             <label>Date Achat:</label>
                             <div class="input-group">
                              <div class="input-group date" >
-                                 <input type="text" name="dateAchat"  class="form-control date" required readonly value="" v-model="car.date_buy"  />
+                                 <input type="text" name="dateAchat"  class="form-control date"  readonly value="" v-model="car.date_buy"  />
                                  <div class="input-group-append">
                                   <span class="input-group-text">
                                    <i class="la la-calendar"></i>
@@ -503,7 +473,7 @@
                            <div class="col-lg-4">
                             <label>Prix Achat:</label>
                             <div class="input-group">
-                                <input type="number" step="0.01" class="form-control" name="prixAchat"  required v-model="car.car_price">
+                                <input type="number" step="0.01" class="form-control" name="prixAchat"   v-model="car.car_price">
                             </div>
                             <span class="form-text text-muted">Entrer Le Prix Achat:</span>
                            </div>
@@ -564,7 +534,7 @@
                              <label>puissance:</label>
                              <div class="input-group">
                               <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                              <input type="number" name="puissance" class="form-control" v-model="car.puissance" required placeholder="Enter your postcode"/>
+                              <input type="number" name="puissance" class="form-control" v-model="car.puissance"  placeholder="Enter your postcode"/>
                              </div>
                              <span class="form-text text-muted">Entrer La puissance</span>
                             </div>
@@ -573,10 +543,10 @@
                                 <label>Carrburant:</label>
                                 <div class="input-group">
                                  <select name="carb" class="form-control" name="carrburant"  v-model="car.carrburant">
-                                     <option value="D">Diesel</option>
-                                     <option value="E">Essence</option>
-                                     <option value="H">Hybrid</option>
-                                     <option value="El">Electric</option>
+                                     <option value="Diesel">Diesel</option>
+                                     <option value="Essence">Essence</option>
+                                     <option value="Hybrid">Hybrid</option>
+                                     <option value="Electric">Electric</option>
                                  </select>
 
                                 </div>

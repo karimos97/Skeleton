@@ -21,7 +21,7 @@ class CreateCarInfosTable extends Migration
             $table->date('date_buy');
             $table->string('maisson_achat',50)->nullable();
             $table->string('rate_credit',50)->nullable();
-            $table->float('car_price')->nullable();
+            $table->float('car_price',12,4)->nullable();
             $table->date('credit_date')->nullable();
             $table->date('date_vente')->nullable();
             $table->float('prix_vente')->nullable();

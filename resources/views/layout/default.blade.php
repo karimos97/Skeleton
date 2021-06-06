@@ -66,7 +66,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <script src="{{asset('js/axios.min.js')}}" type="text/javascript"></script>
             <script src="{{asset("js/custom.js")}}"></script>
             <script src="{{asset("js/toastr.min.js")}}"></script>
-
+            <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
         @endforeach
 
         {{-- Includable JS --}}

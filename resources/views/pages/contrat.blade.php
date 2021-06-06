@@ -78,16 +78,23 @@
             font-size:10px;
         }
 
+        div.chrono{
+            font-weight:bold;
+            font-size:22px;
+             margin-top: 2.3cm;
+             margin-left: 7.1cm;
+             margin-right: 3.5cm;
+        }               
 
     </style>
   </head>
   <body>
 
-     @foreach ($datas as $data)
-         
+  <div class="chrono">000{{$data->id+1000}} </div>
+
 
         <div class="page">
-        <div class="row">
+        <div class="row" style="margin-top: 1.1cm;">
             <div class="col">
                 <!--<img src="https://alpha.delivered.ma/images/code.jpg" alt="" class="logo">-->
             </div>
@@ -96,32 +103,65 @@
             </div>
 
         </div>
-        <div>
-            <div class="order_id text-center"> N° Contracts: {{$data->id}} </div>
-        </div>
+        
         <div class="box">
             <div class="title">Client:</div>
             <div class="row">
                 <div class="col-4">
 
-                    <div> Nom: </div>
+                    <div> Nom et Prenom: </div>
+                    <div>Nationalite:</div>
                     <div> Date et Lieu de Naissance: </div>
                     <div> Adresse: </div>
                     <div> Téléphone: </div>
                     <div> CIN : </div>
                     <div> Passeport: </div>
                     <div> Permis de conduire: </div>
+                    <div>Délivre Le:</div>
 
                 </div>
                 <div class="col-8">
 
                     <div>{{$data->fname.' '.$data->lname}}</div>
-                    <div>{{$data->date_birth}}</div>
-                    <div>{{$data->name}}</div>
+                    <div>{{ $data->nationalite }}</div>
+                    <div>{{$data->date_birth.'  '.$data->Country}} </div>
+                    <div>{{$data->address.' '.$data->City.' '.$data->Country}}</div>
                     <div>{{$data->phone1}}</div>
                     <div>{{$data->cin}}</div>
-                    <div>{{$data->passport}}</div>
+                    @if ($data->passport)
+                        <div>{{ $data->passport }}</div>
+                    @else
+                       <div>&nbsp;</div>
+                    @endif
                     <div>{{$data->permis}}</div>
+                    <div>{{$data->date_permis .' a '.$data->permis_location}}</div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="title">2 Émé Conducteur:</div>
+            <div class="row">
+                <div class="col-4">
+
+                    <div> Nom: </div>
+                    <div> Pernom: </div>
+                    <div> CIN : </div>
+                    <div> Permis de conduire: </div>
+                    <div>Délivre Le:</div>
+                </div>
+                <div class="col-8">
+
+                    <div>{{$data->Clname}}</div>
+                    <div>{{$data->Cfname}}</div>
+                    <div>{{ $data->Cncin }}</div>
+                    <div>{{$data->Cpermis}}</div>
+                    @if ($data->Cdate_permis)
+                    <div>{{$data->Cdate_permis .' à '.$data->CLieuPermis}}</div>
+                    @endif
+                    
+
 
 
                 </div>
@@ -138,28 +178,26 @@
                     <div> Date de Retour: </div>
                     <div> Nombre de Jours: </div>
                     <div> Lieu de Livraison: </div>
-                    <div> Prix/jour: </div>
-                    <div> Prix Total: </div>
-                    <div>Remise:</div>
+                    <div> Kilometrage: </div>
+                    
 
                 </div>
                 <div class="col-8">
 
-                    <div>{{$data->brand_name.' '.$data->model_name}}</div>
-                    <div>{{$data->matricul}}</div>
+                    <div>{{$data->BrandName.' '.$data->Model}}</div>
+                    <div>{{$data->matricule}}</div>
                     <div>{{date('Y-m-d H:i',strtotime($data->date_sorti))}}</div>
                     <div>{{date('Y-m-d H:i',strtotime($data->date_retourn))}}</div>
                     <div>{{$data->duree}}</div>
-                    <div>Agence</div>
-                    <div>{{$data->day_cost}} DH</div>
-                    <div>{{$data->total_cost}}</div>
-                    <div>0</div>
+                    <div>Agence STE Semmy's Cars</div>
+                    <div>{{$data->current_km}} KM</div>
+                    
 
 
                 </div>
             </div>
         </div>
-        <div class="box" style="border-bottom: none;">
+        <!--  <div class="box" style="border-bottom: none;">
             <div class="title">LOCATAIRE:</div>
 
             <div class="row">
@@ -168,23 +206,15 @@
                 </div>
             </div>
             <br>
-            <br>
-            <br>
-            <br>
-            <div class="row">
+
+           <div class="row">
                 <div class="col-12 text-center">J'AI PRIS CONNAISSANCE DES CONDITIONS STIPULEES AU VERSO</div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center" >SIGNATURE</div>
             </div>
         </div>
-    </div>
-
-    @endforeach
-
-
-
-
+    </div>-->
 
 
     <!-- Optional JavaScript; choose one of the two! -->

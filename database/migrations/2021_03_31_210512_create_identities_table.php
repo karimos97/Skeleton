@@ -20,9 +20,12 @@ class CreateIdentitiesTable extends Migration
             $table->string('cin',30)->nullable();
             $table->date('cin_expire')->nullable();
             $table->string('permis',30);
-            $table->date('permis_expire');
+            $table->string('permis_location');
+            $table->date('date_permis');
+            $table->date('permis_expire')->nullable();
             $table->integer('client_id');
             $table->integer('user_id');
+            $table->string('nationalite');
             $table->softDeletes();
             $table->timestamps();
         });

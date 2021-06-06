@@ -2,8 +2,18 @@
 @extends('layout.default')
 <link rel="stylesheet" href="{{ asset('css/tachyons.min.css') }}">
 {{-- Content --}}
-@section('content')
 
+@section('content')
+<style>
+    .error{
+        border-color: #dc3545;
+        color: red !important;
+    }
+    .valid{
+        border-color: #28a745;
+        color: #28a745 !important;
+    }
+</style>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
@@ -170,24 +180,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="NewClient">
+                    <form class="form" id="NewClient" action="#">
                         <div class="card-body">
                          <div class="form-group row">
                           <div class="col-lg-4">
-                           <label>Nom:</label>
-                           <input type="text" class="form-control" name="fname" v-model="client.fname" required  placeholder="Nom Client"/>
+                            <div class="control-group">
+                           <label>Prenom:</label>
+                           <input type="text" class="form-control" name="fname"    placeholder="Nom Client"/>
+                           <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
                            <span class="form-text text-muted">Entrer Le Nom De Client</span> 
+
+                        </div>
                           </div>
                           <div class="col-lg-4">
-                           <label>Prenom:</label>
-                           <input type="text" class="form-control" name="lname" v-model="client.lname"  required holder="Prenom Client"/>
+                           <label>Nom:</label>
+                           <input type="text" class="form-control" name="lname"   holder="Prenom Client"/>
                            <span class="form-text text-muted">Entrer Le Prenom De Client</span>
                           </div>
                           <div class="col-lg-4">
                            <label>Email:</label>
                            <div class="input-group">
                             <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control"  name="email" v-model="client.email" placeholder=""/>
+                            <input type="text" class="form-control"  name="email" placeholder=""/>
                            </div>
                            <span class="form-text text-muted">Entrer Le Email De Client</span>
                           </div>
@@ -196,57 +212,47 @@
                             <div class="col-lg-4">
                                 <label>Nom D'Entreprise:</label>
                                 <div class="input-group">
-                                    <input type="text" name="company" class="form-control" v-model="client.company" placeholder="" />
+                                    <input type="text" name="company" value="STE Semmy's Cars" class="form-control" placeholder="STE Semmy's Cars" />
                                 </div>
                             </div>
                           <div class="col-lg-4">
                            <label>Date Nissance:</label>
-                           <div class="input-group">
-                            <div class="input-group date" >
-                                <input type="text" name="date" class="form-control date-p" readonly required  v-model="client.date" value="" id="kt_datepicker_3"/>
-                                <div class="input-group-append">
-                                 <span class="input-group-text">
-                                  <i class="la la-calendar"></i>
-                                 </span>
-                                </div>
-                               </div>                            </div>
+                                    <input type="text" id="kt_datepicker"  data-target="#kt_datepicker" data-toggle="datetimepicker" name="date" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
+                                                 
                            <span class="form-text text-muted">Entrer La Date Nissance De Client</span>
                           </div>
                           <div class="col-lg-4">
                            <label>Address:</label>
-                           <div class="input-group">
-                            <input type="text" class="form-control" required name="address" v-model="client.address" placeholder="Enter your address"/>
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-                           </div>
+                           
+                            <input type="text" class="form-control"  name="address"  placeholder="Enter your address"/>
+                           
                            <span class="form-text text-muted">Entre l'address de Client</span>
                           </div>
                          </div>
                          <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Code Postal:</label>
-                           <div class="input-group">
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                            <input type="text" name="zip" class="form-control" v-model="client.zip" placeholder="Enter your postcode"/>
-                           </div>
+                           
+                            <input type="text" name="zip" value="32000" class="form-control" placeholder="Enter your postcode"/>
+                           
                            <span class="form-text text-muted">Entrer Le Code Postal De Client</span>
                           </div>
 
                           <div class="col-lg-4">
                             <label>Ville:</label>
-                            <div class="input-group">
+                            
 
-                             <select class="form-control select2 Ville myCity"  required name="city" v-model="client.city"  style="width:100% !important;">
+                             <select class="form-control m-select2 Ville myCity "   name="city"   style="width:100% !important;">
                              </select>
-                            </div>
+                          
                             <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
                            </div>
                           <div class="col-lg-4">
                             <label>Paye:</label>
-                            <div class="input-group">
-                             <select required class="form-control m-select2 Paye"
+                             <select  class="form-control m-select2 Paye"
                                         style="width:100% !important;" name="country"  >
                                 </select>
-                            </div>
+                          
                             <span class="form-text text-muted">Entrer Le Paye Postal De Client</span>
                            </div>
                          </div>
@@ -318,21 +324,30 @@
                          <div class="form-group row">
                             <div class="col-lg-4">
                                 <label>N°Permis:</label>
-                                <div class="input-group">
-                                    <input type="text" required name="npermis" required class="form-control" v-model="client.npermis" placeholder="" />
-                                </div>
+                                    <input type="text"  name="npermis"  class="form-control" placeholder="" />
+                                
                             </div>
                             <div class="col-lg-4">
                                 <label>N°Cin:</label>
-                                <div class="input-group">
-                                    <input type="text" required name="ncin" class="form-control" v-model="client.ncin" placeholder="" />
-                                </div>
+                                    <input type="text"  name="ncin" class="form-control"  placeholder="" />
                             </div>
                             <div class="col-lg-4">
                                 <label>N°Passport:</label>
-                                <div class="input-group">
-                                    <input type="text" required name="npassport" class="form-control" v-model="client.npassport" placeholder="" />
-                                </div>
+                                    <input type="text"  name="npassport" class="form-control"  placeholder="" />
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Date de Delivrence Permis:</label>
+                                    <input type="text" id="date_permis"  data-target="#date_permis" data-toggle="datetimepicker"  name="date_permis" class="form-control"  placeholder="" />
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Lieu de Delivrence Permis:</label>
+                                    <input type="text"  name="lieuPermis" class="form-control"  placeholder="" />
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Nationalite:</label>
+                                    <input type="text"  name="nationalite" value='Marocain' class="form-control"  placeholder="" />
                             </div>
                          </div>
                          <div class="form-group row">
@@ -340,7 +355,7 @@
                                 <label>Sex:</label>
                                 <div class="radio-inline">
                                  <label class="radio radio-solid">
-                                  <input type="radio" name="sex[]" checked="checked" v-model="client.sex" value="M"/>
+                                  <input type="radio" name="sex[]" checked="checked"  value="M"/>
                                   <span></span>
                                   M
                                  </label>
@@ -354,15 +369,12 @@
                             </div>
                             <div class="col-lg-4">
                                 <label>Tele:</label>
-                                <div class="input-group">
-                                 <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                                 <input type="text" name="phone" class="form-control" v-model="client.phone" placeholder="Enter your postcode"/>
-                                </div>
+                                 <input type="text" name="phone" class="form-control"  placeholder="Enter your postcode"/>
                                 <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
                                </div>
                             <div class="col-lg-4">
                                 <label>Observation:</label>
-                                <textarea name="" v-model="client.note" name="note" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea name=""  name="note" class="form-control" cols="30" rows="5"></textarea>
                             </div>
                          </div>
                         </div>
@@ -396,13 +408,13 @@
                         <div class="card-body">
                          <div class="form-group row">
                           <div class="col-lg-4">
-                           <label>Nom:</label>
-                           <input type="text" class="form-control" required name="fname" v-model="Cl.fname" placeholder="Nom Client"/>
+                           <label>Prenom:</label>
+                           <input type="text" class="form-control"  name="fname" v-model="Cl.fname" placeholder="Nom Client"/>
                            <span class="form-text text-muted">Entrer Le Nom De Client</span>
                           </div>
                           <div class="col-lg-4">
-                           <label>Prenom:</label>
-                           <input type="text" class="form-control" required name="lname" v-model="Cl.lname" placeholder="Prenom Client"/>
+                           <label>Nom:</label>
+                           <input type="text" class="form-control"  name="lname" v-model="Cl.lname" placeholder="Prenom Client"/>
                            <span class="form-text text-muted">Entrer Le Prenom De Client</span>
                           </div>
                           <div class="col-lg-4">
@@ -423,52 +435,37 @@
                             </div>
                           <div class="col-lg-4">
                            <label>Date Nissance:</label>
-                           <div class="input-group">
-                            <div class="input-group date" >
-                                <input type="text" name="date" required class="form-control date-p" readonly  v-model="Cl.date_birth" value="" id="kt_datepicker_3"/>
-                                <div class="input-group-append">
-                                 <span class="input-group-text">
-                                  <i class="la la-calendar"></i>
-                                 </span>
-                                </div>
-                               </div>                            </div>
+                        
+                            <input type="text" data-target="#kt_datepicker2" v-model='Cl.date_birth' data-toggle="datetimepicker" id="kt_datepicker2" name="date" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
+
+                        
                            <span class="form-text text-muted">Entrer La Date Nissance De Client</span>
                           </div>
                           <div class="col-lg-4">
                            <label>Address:</label>
-                           <div class="input-group">
-                            <input type="text" class="form-control" name="address" required v-model="Cl.address" placeholder="Enter your address"/>
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-                           </div>
+                            <input type="text" class="form-control" name="address"  v-model="Cl.address" placeholder="Enter your address"/>
                            <span class="form-text text-muted">Entre l'address de Client</span>
                           </div>
                          </div>
                          <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Code Postal:</label>
-                           <div class="input-group">
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
                             <input type="text" name="zip" class="form-control" v-model="Cl.zip_code" placeholder="Enter your postcode"/>
-                           </div>
                            <span class="form-text text-muted">Entrer Le Code Postal De Client</span>
                           </div>
 
                           <div class="col-lg-4">
                             <label>Ville:</label>
-                            <div class="input-group">
 
-                             <select class="form-control select2 Ville myCity" required name="city" v-model="Cl.city"  style="width:100% !important;">
+                             <select class="form-control select2 Ville myCity"  name="city" v-model="Cl.city"  style="width:100% !important;">
                              </select>
-                            </div>
                             <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
                            </div>
                           <div class="col-lg-4">
                             <label>Paye:</label>
-                            <div class="input-group">
-                             <select required class="form-control m-select2 Paye"
+                             <select  class="form-control m-select2 Paye"
                                         style="width:100% !important;" name="country"  v-model="Cl.country">
                                 </select>
-                            </div>
                             <span class="form-text text-muted">Entrer Le Paye Postal De Client</span>
                            </div>
                          </div>
@@ -540,9 +537,7 @@
                          <div class="form-group row">
                             <div class="col-lg-4">
                                 <label>N°Permis:</label>
-                                <div class="input-group">
-                                    <input type="text" required name="npermis" class="form-control" v-model="Cl.permis" placeholder="" />
-                                </div>
+                                    <input type="text"  name="npermis" class="form-control" v-model="Cl.permis" placeholder="" />
                             </div>
                             <div class="col-lg-4">
                                 <label>N°Cin:</label>
@@ -554,6 +549,24 @@
                                 <label>N°Passport:</label>
                                 <div class="input-group">
                                     <input type="text"  name="npassport" class="form-control" v-model="Cl.passport" placeholder="" />
+                                </div>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Date de Delivrence Permis:</label>
+                                    <input type="text"  name="date_permis" class="form-control" v-model="Cl.permis" placeholder="" />
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Lieu de Delivrence Permis:</label>
+                                <div class="input-group">
+                                    <input type="text"  name="lieuPermis" class="form-control" v-model="Cl.cin" placeholder="" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Nationalite:</label>
+                                <div class="input-group">
+                                    <input type="text"  name="nationalite" class="form-control" v-model="Cl.passport" placeholder="" />
                                 </div>
                             </div>
                          </div>
@@ -578,7 +591,7 @@
                                 <label>Tele:</label>
                                 <div class="input-group">
                                  <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                                 <input type="text" name="phone" required class="form-control" v-model="Cl.phone" placeholder="Enter your postcode"/>
+                                 <input type="text" name="phone"  class="form-control" v-model="Cl.phone" placeholder="Enter your postcode"/>
                                 </div>
                                 <span class="form-text text-muted">Entrer La Ville Postal De Client</span>
                                </div>

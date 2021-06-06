@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
-use App\Models\CarBrands;
+use App\Models\carBrands;
 class CarBrandsController extends Controller
 {
     public function __construct()
@@ -21,10 +21,10 @@ class CarBrandsController extends Controller
 
     }
     public function list(Request $request){
-/*         $data=CarBrands::all();
+/*         $data=carBrands::all();
         return Datatables::of($data)->toJson(); */
 
-        return CarBrands::where('brand_name', 'LIKE', '%' . $request->get('q') . '%')->paginate(10);
+        return carBrands::where('brand_name', 'LIKE', '%' . $request->get('q') . '%')->distinct()->paginate(10);
     }
     /**
      * Show the form for creating a new resource.
@@ -55,7 +55,7 @@ class CarBrandsController extends Controller
      */
     public function show($id)
     {
-        return  CarBrands::create($request->all());
+        return  carBrands::create($request->all());
     }
 
     /**
@@ -66,7 +66,7 @@ class CarBrandsController extends Controller
      */
     public function edit($id)
     {
-        return CarBrands::find($id)->toJson();
+        return carBrands::find($id)->toJson();
     }
 
     /**
@@ -78,7 +78,7 @@ class CarBrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return CarBrands::find($id)->toJson();
+        return carBrands::find($id)->toJson();
     }
 
     /**
@@ -89,6 +89,6 @@ class CarBrandsController extends Controller
      */
     public function destroy($id)
     {
-        return CarBrands::find($id)->delete();
+        return carBrands::find($id)->delete();
     }
 }

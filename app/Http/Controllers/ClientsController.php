@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Identity;
 use App\Models\IdentityGallery;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
 {
@@ -51,9 +52,9 @@ class ClientsController extends Controller
        // dd($request->all());
        try {
            //code...
-
+     
         $dt=Carbon::createFromFormat('d/m/Y',strval($request->date))->toDateString();
-
+        $dtPermis=Carbon::createFromFormat('d/m/Y',strval($request->date_permis))->toDateString();
         $sex=$request->sex[0];
        $Cl= Clients::create(['fname'=>$request->fname,
                               'lname'=>$request->lname,
@@ -64,14 +65,14 @@ class ClientsController extends Controller
                               'phone2'=>"",
                               'email'=>$request->email,
                               'observation'=>$request->note,
-                              'user_id'=>1]);
+                              'user_id'=>Auth::id()]);
 
             $adr=Address::create(['address'=>$request->address,
                                   'ville'=>$request->city,
                                   'country'=>$request->country,
                                   'zip_code'=>$request->zip,
                                   'client_id'=>$Cl->id,
-                                  'user_id'=>1]);
+                                  'user_id'=>Auth::id()]);
 
             $id=Identity::create(['passport'=>$request->npassport,
                                   'pass_expire'=>date('Y-m-d'),
@@ -79,7 +80,11 @@ class ClientsController extends Controller
                                   'cin_expire'=>date('Y-m-d'),
                                   'permis'=>$request->npermis,
                                   'permis_expire'=>date('Y-m-d'),
-                                  'client_id'=>$Cl->id,'user_id'=>1]);
+                                  'client_id'=>$Cl->id,
+                                  'permis_location'=>$request->lieuPermis,
+                                  'date_permis'=>$dtPermis,
+                                  'nationalite'=>$request->nationalite,
+                                  'user_id'=>Auth::id()]);
             $path = "/productImages/no-image.png";
             if ($request->permis) {
                 foreach ($request->permis as $key => $img) {
@@ -112,7 +117,7 @@ class ClientsController extends Controller
 
             return response()->json(['Message'=>'New Client Added Successfuly','Error'=>false]);
         } catch (\Throwable $th) {
-             return response()->json(['Message'=>$th->getMessage()],500);
+             return response()->json(['Message'=>$th->getMessage()]);
         }
 
     }
@@ -206,14 +211,14 @@ class ClientsController extends Controller
                               'phone2'=>"",
                               'email'=>$request->email,
                               'observation'=>$request->note,
-                              'user_id'=>1]);
+                              'user_id'=>Auth::id()]);
 
             $adr=Address::where('client_id',$id)->update(['address'=>$request->address,
                                   'ville'=>$request->city,
                                   'country'=>$request->country,
                                   'zip_code'=>$request->zip,
                                   'client_id'=>$id,
-                                  'user_id'=>1]);
+                                  'user_id'=>Auth::id()]);
 
             $id=Identity::where('client_id',$id)->update(['passport'=>$request->npassport,
                                   'pass_expire'=>date('Y-m-d'),
@@ -221,7 +226,7 @@ class ClientsController extends Controller
                                   'cin_expire'=>date('Y-m-d'),
                                   'permis'=>$request->npermis,
                                   'permis_expire'=>date('Y-m-d'),
-                                  'client_id'=>$id,'user_id'=>1]);
+                                  'client_id'=>$id,'user_id'=>Auth::id()]);
             $path = "/productImages/no-image.png";
             $id=Identity::where('client_id',$id)->first();
             if($id){

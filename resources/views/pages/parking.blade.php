@@ -3,7 +3,17 @@
 <link rel="stylesheet" href="{{ asset('css/tachyons.min.css') }}">
 {{-- Content --}}
 @section('content')
+<style>
 
+.error{
+        border-color: #dc3545;
+        color: red !important;
+    }
+    .valid{
+        border-color: #28a745;
+        color: #28a745 !important;
+    }
+</style>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
@@ -115,57 +125,44 @@
 
                             <div class="col-lg-4">
                                 <label>Client:</label>
-                                <div class="input-group">
                                     <input type="hidden" id="cl" name="client" value="">
-                                 <select class="form-control  m-select2 contactCl" name="client2" v-model="contract.cl"  style="width:100% !important;">
+                                 <select class="form-control  m-select2 contactCl" name="client2"  style="width:100% !important;">
                                  </select>
-                                </div>
                                 <span class="form-text text-muted">Entrer Le Client </span>
                                </div>
                               <div class="col-lg-4">
                                 <label>Voiture:</label>
-                                <div class="input-group">
                                     <input type="hidden" id="car" name="voiture" value="">
-                                 <select required class="form-control m-select2 ContactVt"
-                                            style="width:100% !important;" name="conVt" v-model="contract.car"  required>
+                                 <select  class="form-control m-select2 ContactVt"
+                                            style="width:100% !important;" name="conVt"   >
                                     </select>
-                                </div>
                                 <span class="form-text text-muted">Entrer La Voiture</span>
                                </div>
 
 
                           <div class="col-lg-4">
                            <label>Date De Sorti:</label>
-                           <div class="input-group">
-                            <div class="input-group " id="kt_datetimepicker_2" data-target-input="nearest">
-                                <input type="text" name="dateSortie" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_2"/>
-                                <div class="input-group-append" data-target="#kt_datetimepicker_2" data-toggle="datetimepicker">
-                                 <span class="input-group-text">
-                                  <i class="ki ki-calendar"></i>
-                                 </span>
-                                </div>
-                            </div>
-                           </div>
+                                <input type="text" id="kt_datetimepicker_2"  data-target="#kt_datetimepicker_2" data-toggle="datetimepicker" name="dateSortie" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_2"/>
+
+                          
                           </div>
                          </div>
                          <div class="form-group row">
 
                             <div class="col-lg-4">
                                 <label>Duree:</label>
-                                <input type="number" class="form-control" step="0.5" name="duree" v-model="contract.dure" required placeholder="Duree"/>
+                                <input type="number" id="duree" class="form-control" step="0.5" name="duree"   placeholder="Duree"/>
                                 <span class="form-text text-muted">Entrer La matricule</span>
                                </div>
                                <div class="col-lg-4">
                                 <label>Coût du jour:</label>
-                                <input type="number" class="form-control" step="0.1" required name="cost" v-model="contract.cost" placeholder="Coût du jour"/>
-                                <span class="form-text text-muted">Entrer Le Code VIN</span>
+                                <input type="number" class="form-control" id="day_cost" step="0.1"  name="cost" placeholder="Coût du jour"/>
+                                <span class="form-text text-muted">Entrer Le cout du jour</span>
                                </div>
 
                             <div class="col-lg-4">
                                 <label>Somme Total:</label>
-                                <div class="input-group">
-                                    <input type="number" required name="total" class="form-control" v-model="contract.total" placeholder="" />
-                                </div>
+                                    <input type="number" id="sum_total"  name="total" class="form-control" placeholder="" />
                             </div>
 
 
@@ -174,47 +171,89 @@
 
                           <div class="col-lg-4">
                             <label>Date Retourn:</label>
-                            <div class="input-group">
-                                <div class="input-group " id="kt_datetimepicker_3" data-target-input="nearest">
-                                    <input type="text" name="dateReturn" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
-                                    <div class="input-group-append" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker">
-                                     <span class="input-group-text">
-                                      <i class="ki ki-calendar"></i>
-                                     </span>
-                                    </div>
-                                </div> 
-                             </div>
-                            <span class="form-text text-muted">Entrer La Date Retourn</span>
-                           </div>
+                                    <input type="text" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker" id="kt_datetimepicker_3" name="dateReturn" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_3"/>
 
+                            <span class="form-text text-muted">Entrer La Date Retoure</span>
+                          </div>
                            <div class="col-lg-4">
                             <label>Avance:</label>
-                            <div class="input-group">
-                                <input type="number" step="0.01"  value="0" class="form-control" name="avance"  required v-model="contract.avance">
-                            </div>
+                                <input type="number" step="0.01" id="avance"  value="0" class="form-control" name="avance"   >
                             <span class="form-text text-muted">Entrer L' Avance:</span>
                            </div>
 
                            <div class="col-lg-4">
                             <label>Reste:</label>
-                            <div class="input-group">
-                             <input type="number" step="0.1" value="0" class="form-control" name="rest" v-model="contract.rest" placeholder="Entrer les Rest"/>
-                             <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-                            </div>
+                             <input type="number" step="0.1" id="rest" value="0" class="form-control" name="rest" placeholder="Entrer les Rest"/>
                             <span class="form-text text-muted">Entre le Rest</span>
                            </div>
                         </div>
-                         <div class="form-group row">
+
+        <!------------------ ---------------- ----------------------------- --------  les Info de 2eme Condecture   --------------- ------------------------ ---------------- -->   
+         
+                        <hr>
+
+                        <h6 class="text-dark font-weight-bold mb-10">2 Émé Conducteur :</h6>
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                             <label>Nom:</label>
+                             <div class="input-group">
+                              <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
+                              <input type="text"  value="" name="Cname" class="form-control" placeholder="Entrer Le Nom de 2 Émé Conducteur"/>
+                             </div>
+                             <span class="form-text text-muted">Entrer Le Nom de 2 Émé Conducteur </span>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                             <label>Pernom:</label>
+                             <div class="input-group">
+                              <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
+                              <input type="text"  value="" name="Cfname" class="form-control"  placeholder="Entrer Le Prenom de 2 Émé Conducteur"/>
+                             </div>
+
+                             
+                             <span class="form-text text-muted">Entrer Le Prenom de 2 Émé Conducteur </span>
+                            </div>
+                            <div class="col-lg-4">
+                            <label>N° De pérmis :</label>
+                             <div class="input-group">
+                              <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
+                              <input type="text"  value="" name="Cpermis" class="form-control" placeholder="Entrer Le N° De pérmis de 2 Émé Conducteur"/>
+                             </div>
+                             <span class="form-text text-muted">Entrer Le N° De pérmis de 2 Émé Conducteur </span>
+                            </div>
+                             </div>
+                             <div class="form-group row">
+                                <div class="col-lg-4">
+                                 <label>N°CIN:</label>
+                                 <div class="input-group">
+                                  <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
+                                  <input type="text"  value="" name="Ccin" class="form-control" placeholder="Entrer Le Nom de 2 Émé Conducteur"/>
+                                 </div>
+                                 <span class="form-text text-muted">Entrer Le Nom de 2 Émé Conducteur </span>
+                                </div>
+    
+    
+                                <div class="col-lg-4">
+                                    <label>Date de Delivrence Permis:</label>
+                                        <input type="text" id="date_permis"  data-target="#date_permis" data-toggle="datetimepicker"  name="date_permis" class="form-control"  placeholder="" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Lieu de Delivrence Permis:</label>
+                                        <input type="text"  name="lieuPermis" class="form-control"  placeholder="" />
+                                </div>
+                                 </div>
+                                <!------------------ ---------------- ----------------------------- --------  les Info de 2eme Condecture   --------------- ------------------------ ---------------- --> 
+                        <hr>
+                                <div class="form-group row">
                           <div class="col-lg-4">
                            <label>Kilometrage Actuelle:</label>
-                           <div class="input-group">
-                            <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                            <input type="text"  value="" name="kilometrage" class="form-control" v-model="contract.kilometrage" placeholder="Enter your postcode"/>
-                           </div>
+                            <input type="text"  value="" name="kilometrage" class="form-control"  placeholder="Entrer Le Kilometrage Actuell"/>
                            <span class="form-text text-muted">Entrer Le Kilometrage Actuell</span>
                           </div>
                          </div>
 
+                         
                         </div>
                         <div class="card-footer">
                          <div class="row">
@@ -225,6 +264,8 @@
                           </div>
                          </div>
                         </div>
+
+                        
                        </form>
                 </div>
 
@@ -254,7 +295,7 @@
                                 <label>Client:</label>
                                 <div class="input-group">
                                     <input type="hidden" id="cl" name="client" value="">
-                                 <select class="form-control  m-select2 contactCl" name="client2" v-model="contract.cl"  style="width:100% !important;">
+                                 <select class="form-control  m-select2 contactCl" name="client2" style="width:100% !important;">
                                  </select>
                                 </div>
                                 <span class="form-text text-muted">Entrer Le Client </span>
@@ -263,8 +304,8 @@
                                 <label>Voiture:</label>
                                 <div class="input-group">
                                     <input type="hidden" id="car" name="voiture" value="">
-                                 <select required class="form-control m-select2 ContactVt"
-                                            style="width:100% !important;" name="conVt" v-model="contract.car"  required>
+                                 <select  class="form-control m-select2 ContactVt"
+                                            style="width:100% !important;" name="conVt"  >
                                     </select>
                                 </div>
                                 <span class="form-text text-muted">Entrer La Voiture</span>
@@ -275,7 +316,7 @@
                            <label>Date De Sorti:</label>
                            <div class="input-group">
                             <div class="input-group-prepend"></div>
-                            <input type="text" class="form-control date" readonly value="" name="dateSortie" required v-model="contract.exit" placeholder=""/>
+                            <input type="text" class="form-control date" readonly value="" name="dateSortie"  placeholder=""/>
                            </div>
                            <span class="form-text text-muted">Entrer La Date Sortie</span>
                           </div>
@@ -284,19 +325,19 @@
 
                             <div class="col-lg-4">
                                 <label>Duree:</label>
-                                <input type="number" class="form-control" step="0.5" name="duree" v-model="contract.dure" required placeholder="Duree"/>
+                                <input type="number" class="form-control" step="0.5" name="duree" placeholder="Duree"/>
                                 <span class="form-text text-muted">Entrer La matricule</span>
                                </div>
                                <div class="col-lg-4">
                                 <label>Coût du jour:</label>
-                                <input type="number" class="form-control" step="0.1" required name="cost" v-model="contract.cost" placeholder="Coût du jour"/>
+                                <input type="number" class="form-control" step="0.1"  name="cost" placeholder="Coût du jour"/>
                                 <span class="form-text text-muted">Entrer Le Code VIN</span>
                                </div>
 
                             <div class="col-lg-4">
                                 <label>Somme Total:</label>
                                 <div class="input-group">
-                                    <input type="number" required name="total" class="form-control" v-model="contract.total" placeholder="" />
+                                    <input type="number"  name="total" class="form-control"  placeholder="" />
                                 </div>
                             </div>
 
@@ -308,7 +349,7 @@
                             <label>Date Retourn:</label>
                             <div class="input-group">
                              <div class="input-group date" >
-                                 <input type="text" name="dateReturn"  class="form-control date" required readonly value="" v-model="contract.return"  />
+                                 <input type="text" name="dateReturn"  class="form-control date"  readonly value=""  />
                                  <div class="input-group-append">
                                   <span class="input-group-text">
                                    <i class="la la-calendar"></i>
@@ -321,7 +362,7 @@
                            <div class="col-lg-4">
                             <label>Avance:</label>
                             <div class="input-group">
-                                <input type="number" step="0.01"  value="0" class="form-control" name="avance"  required v-model="contract.avance">
+                                <input type="number" step="0.01"  value="0" class="form-control" name="avance"  >
                             </div>
                             <span class="form-text text-muted">Entrer L' Avance:</span>
                            </div>
@@ -329,7 +370,7 @@
                            <div class="col-lg-4">
                             <label>Reste:</label>
                             <div class="input-group">
-                             <input type="number" step="0.1" value="0" class="form-control" name="rest" v-model="contract.rest" placeholder="Entrer les Rest"/>
+                             <input type="number" step="0.1" value="0" class="form-control" name="rest" placeholder="Entrer les Rest"/>
                              <div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
                             </div>
                             <span class="form-text text-muted">Entre le Rest</span>
@@ -340,7 +381,7 @@
                            <label>Kilometrage Actuelle:</label>
                            <div class="input-group">
                             <div class="input-group-append"><span class="input-group-text"><i class="la la-bookmark-o"></i></span></div>
-                            <input type="text"  value="" name="kilometrage" class="form-control" v-model="contract.kilometrage" placeholder="Enter your postcode"/>
+                            <input type="text"  value="" name="kilometrage" class="form-control"  placeholder="Enter your postcode"/>
                            </div>
                            <span class="form-text text-muted">Entrer Le Kilometrage Actuell</span>
                           </div>
